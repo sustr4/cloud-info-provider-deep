@@ -120,7 +120,13 @@ pipeline {
                     "Check new artifacts at:\n\t- RPMs/DEBs: ${env.BUILD_URL}\n",
                     ['wp3', 'preview-testbed', "DEEPaaS-${env.BRANCH_NAME}"],
                     'Task',
-                    'mariojmdavid'
+                    'mariojmdavid',
+                    ['wgcastell',
+                     'vkozlov',
+                     'dlugo',
+                     'keiichiito',
+                     'laralloret',
+                     'ignacioheredia']
                 )
             }
         }
