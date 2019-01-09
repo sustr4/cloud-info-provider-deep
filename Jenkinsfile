@@ -85,7 +85,8 @@ pipeline {
                     steps {
                         checkout scm
                         echo 'Within build on CentOS7'
-                        sh 'sudo yum install -y rpm-build centos-release-openstack-newton python-pbr python-setuptools'
+                        sh 'yum --enablerepo=extras install -y epel-release && yum clean all && yum makecache fast'
+                        sh 'yum install -y rpm-build centos-release-openstack-newton python-pbr python-setuptools'
                         sh 'python setup.py sdist'
                         sh 'mkdir ~/rpmbuild'
                         sh "echo '%_topdir %(echo $HOME)/rpmbuild' > ~/.rpmmacros"
