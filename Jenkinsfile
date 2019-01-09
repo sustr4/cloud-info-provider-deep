@@ -78,31 +78,31 @@ pipeline {
                         }
                     }
                 }
-                //stage('Build on CentOS7') {
-                //    agent {
-                //        label 'bcentos7'
-                //    }
-                //    steps {
-                //        checkout scm
-                //        echo 'Within build on CentOS7'
-                //        sh 'sudo yum install -y rpm-build centos-release-openstack-newton python-pbr python-setuptools'
-                //        sh 'python setup.py sdist'
-                //        sh 'mkdir ~/rpmbuild'
-                //        sh "echo '%_topdir %(echo $HOME)/rpmbuild' > ~/.rpmmacros"
-                //        sh 'mkdir -p ~/rpmbuild/{SOURCES,SPECS}'
-                //        sh 'cp dist/cloud_info_provider*.tar.gz ~/rpmbuild/SOURCES/'
-                //        sh 'cp rpm/cloud-info-provider*.spec ~/rpmbuild/SPECS/'
-                //        sh 'rpmbuild --define "_pbr_version $(python setup.py --version)" -ba ~/rpmbuild/SPECS/cloud-info-provider.spec'
-                //        sh 'rpmbuild --define "_pbr_version $(python setup.py --version)" -ba ~/rpmbuild/SPECS/cloud-info-provider-openstack.spec'
-                //        //sh 'rpmbuild --define "_pbr_version $(python setup.py --version)" -ba ~/rpmbuild/SPECS/cloud-info-provider-opennebula.spec'
-                //        sh 'cp ~/rpmbuild/SRPMS/*.rpm ~/rpmbuild/RPMS/noarch/*.rpm ${WORKSPACE}/rpm/'
-                //    }
-                //    post {
-                //        success {
-                //            archiveArtifacts artifacts: '**/rpm/*.rpm'
-                //        }
-                //    }
-                //}
+                stage('Build on CentOS7') {
+                    agent {
+                        label 'bcentos7'
+                    }
+                    steps {
+                        checkout scm
+                        echo 'Within build on CentOS7'
+                        sh 'sudo yum install -y rpm-build centos-release-openstack-newton python-pbr python-setuptools'
+                        sh 'python setup.py sdist'
+                        sh 'mkdir ~/rpmbuild'
+                        sh "echo '%_topdir %(echo $HOME)/rpmbuild' > ~/.rpmmacros"
+                        sh 'mkdir -p ~/rpmbuild/{SOURCES,SPECS}'
+                        sh 'cp dist/cloud_info_provider*.tar.gz ~/rpmbuild/SOURCES/'
+                        sh 'cp rpm/cloud-info-provider*.spec ~/rpmbuild/SPECS/'
+                        sh 'rpmbuild --define "_pbr_version $(python setup.py --version)" -ba ~/rpmbuild/SPECS/cloud-info-provider.spec'
+                        sh 'rpmbuild --define "_pbr_version $(python setup.py --version)" -ba ~/rpmbuild/SPECS/cloud-info-provider-openstack.spec'
+                        //sh 'rpmbuild --define "_pbr_version $(python setup.py --version)" -ba ~/rpmbuild/SPECS/cloud-info-provider-opennebula.spec'
+                        sh 'cp ~/rpmbuild/SRPMS/*.rpm ~/rpmbuild/RPMS/noarch/*.rpm ${WORKSPACE}/rpm/'
+                    }
+                    post {
+                        success {
+                            archiveArtifacts artifacts: '**/rpm/*.rpm'
+                        }
+                    }
+                }
             }
         }
 
